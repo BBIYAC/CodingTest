@@ -23,8 +23,9 @@ n = int(input('>> '))
 
 # 다이나믹 프로그래밍
 def dp_solution():
-    d = [0]*30001
+    d = [0]*(n+1)
     for i in range(2, n+1):
+        print(i, d)
         # 현재의 수에서 1을 빼는 경우
         d[i] = d[i-1]+1
         # 현재의 수가 2로 나누어 떨어지는 경우
@@ -39,18 +40,3 @@ def dp_solution():
     return d[n]
 
 print(dp_solution())
-
-# 재귀 함수 활용
-count = 0
-def division(n):
-    global count
-    if n>1:
-        count += 1
-        if n%5 <= 1:
-            division(n//5) if n%5==0 else division(n-1)
-        elif n%3 == 0:
-            division(n//3)
-        elif n%2 == 0:
-            division(n//2)
-        return count
-print(division(n))
