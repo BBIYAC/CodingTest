@@ -25,7 +25,6 @@ n = int(input('>> '))
 def dp_solution():
     d = [0]*(n+1)
     for i in range(2, n+1):
-        print(i, d)
         # 현재의 수에서 1을 빼는 경우
         d[i] = d[i-1]+1
         # 현재의 수가 2로 나누어 떨어지는 경우
