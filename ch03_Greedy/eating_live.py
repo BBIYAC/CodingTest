@@ -33,8 +33,7 @@ def solution(food_times, k):
         k -= 1
         times[eat] -= 1
         result = (eat+1)%3+1
-        print(k, times)
-        # k번 반복(k초 후)
+        # k번 먹었으면(k초 후)
         if k == 0:
             return result
     # 모든 음식을 다 먹었으면
