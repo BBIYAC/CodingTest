@@ -41,3 +41,26 @@ def solution():
         return 'READY'
 
 print(solution())
+
+
+# 정답
+def answer_solution():
+    n=input('>> ')
+    length = len(n) # 정수 값의 총 자릿수
+    summary = 0
+
+    # 왼쪽 부분의 자릿수 합 더하기
+    for i in range(length//2):
+        summary += int(n[i])
+
+    # 오른쪽 부분의 자릿수 합 빼기
+    for i in range(length//2, length):
+        summary -= int(n[i])
+
+    # 왼쪽 부분과 오른쪽 부분의 자릿수 합이 동일한 지 검사
+    if summary == 0:
+        return 'LUCKY'
+    else:
+        return 'READY'
+
+print(answer_solution())
