@@ -34,33 +34,36 @@
 17
 '''
 
-# def solution(s):
-#     answer = len(s)
-#     for i in range(1, len(s)//2+1):
-#         count = 1
-#         string = ''
-#         for j in range(i, len(s), i):
-#             # 같은 문자열 연속되면
-#             if s[j:j+i] == s[j-i:j]:
-#                 count += 1
-#             # 같은 문자열이 2개 이상이면
-#             elif count > 1: 
-#                 string += str(count)+s[j-i:j]
-#                 count = 1
-#             else: # 같은 문자열이 없으면
-#                 string += s[j-i:j]
-#         # 나머지 문자열
-#         string += str(count) + s[-i:] if count > 1 else s[-i:]
-#         answer = min(len(string), answer)
-#     return answer
+def solution(s):
+    answer = len(s)
+    for i in range(1, len(s)//2+1):
+        count = 1
+        string = ''
+        remain = s[:i]
+        for j in range(i, len(s), i):
+            # 같은 문자열 연속되면
+            if s[j:j+i] == s[j-i:j]:
+                count += 1
+            # 같은 문자열이 2개 이상이면
+            elif count > 1: 
+                string += str(count)+s[j-i:j]
+                count = 1
+            else: # 같은 문자열이 없으면
+                string += s[j-i:j]
+                remain = s[j:j+i]
+        # 나머지 문자열
+        string += str(count) + remain if count > 1 else remain
+        answer = min(len(string), answer)
+    return answer
 
-# print('1:', solution('aabbaccc'))
-# print('2:', solution('ababcdcdabcdcd'))
-# print('3:', solution('abcabcdede'))
-# print('4:', solution('abcabcabcabcdededededede'))
-# print('5:', solution('xababcdcdababcdcd'))
+print('1:', solution('aabbaccc'))
+print('2:', solution('ababcdcdabcdcd'))
+print('3:', solution('abcabcdede'))
+print('4:', solution('abcabcabcabcdededededede'))
+print('5:', solution('xababcdcdababcdcd'))
 
 
+# 정답
 def answer_solution(s):
     answer = len(s)
     # 1개 단위부터 압축 단위를 늘려가며 확인
