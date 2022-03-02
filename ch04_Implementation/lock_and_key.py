@@ -16,7 +16,7 @@
 # 출력
 true
 '''
-
+# 프로그래머스(https://programmers.co.kr/learn/courses/30/lessons/60059?language=python3) 채점 결과 런타임 에러
 def solution(key, lock):
     # 구멍
     lock_hole = []
