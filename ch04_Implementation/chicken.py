@@ -60,50 +60,71 @@
 32
 '''
 
-# def solution():
-#     answer = 0
-#     n, m = map(int, input('>> ').split())
-
-#     return answer
-
-# print(solution())
-
-# 정답
 from itertools import combinations
 
+def solution():
+    n, m = map(int, input('>> ').split())
+    chicken, house = [], []
+    for r in range(n):
+        data = list(map(int, input('>> ').split()))
+        for c, d in enumerate(data):
+            if d == 1:
+                house.append((r, c)) # 집
+            elif d == 2:
+                chicken.append((r, c)) # 치킨집
 
-n, m = map(int, input('>> ').split())
-chicken, house = [], []
-for r in range(n):
-    data = list(map(int, input('>> ').split()))
-    for c in range(n):
-        if data[c] == 1:
-            house.append((r, c)) # 집
-        elif data[c] == 2:
-            chicken.append((r, c)) # 치킨집
+    # 모든 치킨집 중 m개의 치킨집을 뽑는 조합
+    candidates = list(combinations(chicken, m))
 
-# 모든 치킨집 중 m개의 치킨집을 뽑는 조합
-candidates = list(combinations(chicken, m))
-
-
-# 치킨 거리의 합을 계산하는 함수
-def get_sum(candidate):
-    result = 0
-    # 모든 집에 대하여
-    for hx, hy in house:
-        # 가장 가까운 치킨집 찾기
-        temp = 1e9
-        for cx, cy in candidate:
-            temp = min(temp, abs(hx-cx)+abs(hy-cy))
-        # 가장 가까운 치킨집까지의 거리 더하기
-        result += temp
-    # 치킨 거리의 합 반환
-    return result
-
-def answer_solution():
     answer = 1e9
     for candidate in candidates:
-        answer = min(answer, get_sum(candidate))
+        result = 0
+        for hx, hy in house:
+            temp = 1e9
+            for cx, cy in candidate:
+                temp = min(temp, abs(hx-cx)+abs(hy-cy))
+            result += temp
+        answer = min(answer, result)
+
     return answer
 
-print(answer_solution())
+print(solution())
+
+
+# 정답
+
+# n, m = map(int, input('>> ').split())
+# chicken, house = [], []
+# for r in range(n):
+#     data = list(map(int, input('>> ').split()))
+#     for c in range(n):
+#         if data[c] == 1:
+#             house.append((r, c)) # 집
+#         elif data[c] == 2:
+#             chicken.append((r, c)) # 치킨집
+
+# # 모든 치킨집 중 m개의 치킨집을 뽑는 조합
+# candidates = list(combinations(chicken, m))
+
+
+# # 치킨 거리의 합을 계산하는 함수
+# def get_sum(candidate):
+#     result = 0
+#     # 모든 집에 대하여
+#     for hx, hy in house:
+#         # 가장 가까운 치킨집 찾기
+#         temp = 1e9
+#         for cx, cy in candidate:
+#             temp = min(temp, abs(hx-cx)+abs(hy-cy))
+#         # 가장 가까운 치킨집까지의 거리 더하기
+#         result += temp
+#     # 치킨 거리의 합 반환
+#     return result
+
+# def answer_solution():
+#     answer = 1e9
+#     for candidate in candidates:
+#         answer = min(answer, get_sum(candidate))
+#     return answer
+
+# print(answer_solution())
