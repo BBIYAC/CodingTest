@@ -51,21 +51,34 @@ print(answer_solution(12, [1, 3, 4, 9, 10], [3, 5, 7])) # 1
 
 # 다시 한 번 try
 def solution(n, weak, dist):
+    # 길이 연장
     length = len(weak)
     for i in range(length):
         weak.append(weak[i]+n)
+    # 투입할 친구 수 초기화
     answer = len(dist)+1
+    # 시작점
     for start in range(length):
+        # 친구를 나열하는 모든 경우의 수 확인
         for friends in list(permutations(dist, len(dist))):
+            # 투입할 친구 수
             count = 1
+            # 해당 친구가 점검할 수 있는 마지막 위치
             position = weak[start] + friends[count-1]
+            # 시작점부터 모든 취약점 점검
             for index in range(start, start+length):
+                # 점검할 위치를 벗어나는 경우
                 if position < weak[index]:
+                    # 친구 투입
                     count += 1
+                    # 친구 투입이 불가능하면 정지
                     if count > len(dist):
                         break
+                    # 친구가 점검할 마지막 위치 지정
                     position = weak[index] + friends[count-1]
+            # 투입할 친구 최솟값
             answer = min(answer, count)
+    # 친구를 모두 투입해도 취약점 점검이 안되는 경우
     if answer > len(dist):
         return -1
     return answer
