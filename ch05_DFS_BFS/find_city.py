@@ -43,15 +43,56 @@
 3
 '''
 
-def solution():
-    answer = 0
+# def solution():
+#     answer = 0
+#     # 도시 개수 N, 도로 개수 M, 최단 거리 K, 출발 도시 번호 X
+#     n, m, k, x = map(int, input('>> ').split())
+#     road = []
+#     for _ in range(m):
+#         s, e = map(int, input('>> ').split())
+#         road.append((s, e))
+    
+#     return answer
+
+# print(solution())
+
+# 정답
+from collections import deque
+
+def answer_solution():
+    answer = ''
     # 도시 개수 N, 도로 개수 M, 최단 거리 K, 출발 도시 번호 X
     n, m, k, x = map(int, input('>> ').split())
-    road = []
+    road = [[] for _ in range(n+1)]
     for _ in range(m):
         s, e = map(int, input('>> ').split())
-        road.append((s, e))
-    
+        road[s].append(e)
+    # 모든 도시에 대한 최단 거리 초기화
+    distance = [-1]*(n+1)
+    distance[x] = 0 # 출발 도시-출발 도시 간의 거리는 0
+
+    # 너비 우선 탐색(BFS)
+    q = deque([x])
+    while q:
+        now = q.popleft()
+        # 현재 도시에서 이동할 수 있는 모든 도시 확인
+        for next in road[now]:
+            # 아직 방문하지 않은 도시라면
+            if distance[next] == -1:
+                # 최단 거리 갱신
+                distance[next] = distance[now]+1
+                q.append(next)
+
+    # 최단 거리가 K인 모든 도시의 번호를 오름차순으로 출력
+    check = False
+    for i in range(1, n+1):
+        if distance[i] == k:
+            answer += str(i)+'\n'
+            check = True
+
+    # 만약 최단 거리가 K인 도시가 없다면 -1 출력
+    if check == False:
+        answer = -1
     return answer
 
-print(solution())
+print(answer_solution())
