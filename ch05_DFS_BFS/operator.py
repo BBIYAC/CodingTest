@@ -42,7 +42,6 @@ N개의 수와 N-1개의 연산자가 주어졌을 때, 만들 수 있는 식의
 54
 -24
 '''
-import math
 from itertools import permutations
 
 def solution():
@@ -54,13 +53,12 @@ def solution():
         for _ in range(input_operator[i]):
             operator.append(i)
     ops = list(permutations(operator, len(operator)))
-    max_answer = 0
-    min_answer = math.prod(num)
+    max_answer = -1e9
+    min_answer = 1e9
     for tuple_op in ops:
         list_op = list(tuple_op)
         answer = num[0]
         for i, op in enumerate(list_op):
-            print(op, answer, num[i+1])
             if op == 0: # (+)
                 answer += num[i+1]
             elif op == 1: # (-)
@@ -78,3 +76,47 @@ def solution():
     return str(max_answer)+'\n'+str(min_answer)
 
 print(solution())
+
+# 정답
+
+n = int(input('>> '))
+# 연산을 수행하고자 하는 수 리스트
+data = list(map(int, input('>> ').split()))
+# 더하기, 빼기, 곱하기, 나누기 연산자 개수
+add, sub, mul, div = map(int, input('>> ').split())
+
+# 최솟값과 최댓값 초기화
+min_value = 1e9
+max_value = -1e9
+
+# 깊이 우선 탐색(DFS) 메서드
+def dfs(i, now):
+    global min_value, max_value, add, sub, mul, div
+    # 모든 연산자를 다 사용한 경우, 최솟값과 최댓값 업데이트
+    if i == n:
+        min_value = min(min_value, now)
+        max_value = max(max_value, now)
+    else:
+        # 각 연산자에 대하여 재귀적으로 수행
+        if add > 0:
+            add -= 1
+            dfs(i+1, now+data[i])
+            add += 1
+        if sub > 0:
+            sub -= 1
+            dfs(i+1, now-data[i])
+            sub += 1
+        if mul > 0:
+            mul -= 1
+            dfs(i+1, now*data[i])
+            mul += 1
+        if div > 0:
+            div -= 1
+            dfs(i+1, int(now/data[i]))
+            div += 1
+
+def answer_solution():
+    dfs(1, data[0])
+    return str(max_value)+'\n'+str(min_value)
+    
+print(answer_solution())
