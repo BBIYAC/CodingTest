@@ -9,3 +9,11 @@ function solution(nums) {
 
     return selected.length;
 }
+
+// BEST ANSWER
+function answer_solution(nums){
+    const pokemon = new Set(nums);
+    const pokemonVarietyCount = pokemon.size;
+    const pokemonCounts = nums.length;
+    return pokemonVarietyCount > pokemonCounts/2 ? pokemonCounts/2 : pokemonVarietyCount;
+}
