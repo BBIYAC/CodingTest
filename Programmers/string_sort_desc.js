@@ -10,3 +10,9 @@ function solution(s) {
         if(a===b) return 0;})
     return arr.join('');
 }
+
+// best answer
+function solution(s) {
+    var answer = s.split('').sort().reverse().join('');
+    return answer;
+}
