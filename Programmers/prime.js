@@ -24,19 +24,55 @@
 // }
 
 // 다른 풀이
-function solution(n) {
-    const s = new Set();
-    for(let i=1; i<=n; i+=2){
-        s.add(i);
-    }
-    s.delete(1);
-    s.add(2);
-    for(let j=3; j<Math.sqrt(n); j++){
-        if(s.has(j)){
-             for(let k=j*2; k<=n; k+=j){    
-                s.delete(k);
-             }
-        }
-    }
-    return s.size;
+// function solution(n) {
+//     const s = new Set();
+//     for(let i=1; i<=n; i+=2){
+//         s.add(i);
+//     }
+//     s.delete(1);
+//     s.add(2);
+//     for(let j=3; j<Math.sqrt(n); j++){
+//         if(s.has(j)){
+//              for(let k=j*2; k<=n; k+=j){    
+//                 s.delete(k);
+//              }
+//         }
+//     }
+//     return s.size;
+// }
+
+// 소수 찾기 Level2
+function isPrime(n) {
+	if (n < 2) return false;
+	for (let i = 2; i <= Math.sqrt(n); i++) {
+		if (n % i === 0) return false;
+	}
+	return true;
+}
+
+function dfs(set, arr, fixed) {
+	if (arr.length >= 1) {
+		for (let i = 0; i < arr.length; i++) {
+			let newFixed = fixed + arr[i];
+			let copyArr = [...arr];
+			copyArr.splice(i, 1);
+
+			if (isPrime(parseInt(newFixed))) {
+				set.add(parseInt(newFixed));
+			}
+
+			dfs(set, copyArr, newFixed);
+		}
+	}
+}
+
+function solution(numbers) {
+	let nums = numbers.split("");
+	let set = new Set();
+
+	dfs(set, nums, '');
+	
+	console.log(set);
+
+	return set.size;
 }
