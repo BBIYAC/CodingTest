@@ -27,3 +27,21 @@ function solution(left, right) {
     }
     return answer;
 }
+
+// 파이썬 버전
+/*
+# 약수의 개수
+def count_num(num):
+    count = 0
+    for n in range(1, num+1):
+        if num%n == 0:
+            count += 1
+    return count
+
+# 약수의 개수가 짝수인지 홀수인지
+def solution(left, right):
+    answer = 0
+    for num in range(left, right+1):
+        answer = answer+num if count_num(num)%2 == 0 else answer-num
+    return answer
+*/
