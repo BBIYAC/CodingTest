@@ -29,20 +29,34 @@
 예제 출력
 1 0 0 1 1 0 0 1
 '''
+# 시간 초과 에러
+# # 상근이가 가지고 있는 숫자 카드의 개수 N
+# n = int(input('>> '))
+# # 상근이가 가지고 있는 숫자 카드 배열
+# n_arr = list(map(int, input('>> ').split()))
+# # 주어지는 숫자 카드의 개수 M
+# m = int(input('>> '))
+# # 주어지는 숫자 카드 배열
+# m_arr = list(map(int, input('>> ').split()))
+
+# for num in m_arr:
+#     # 해당 숫자 카드를 상근이가 가지고 있으면 1
+#     if num in n_arr:
+#         print(1, end=" ")
+#     else: # 해당 숫자를 가지고 있지 않으면 0
+#         print(0, end=" ")
+
+
+# 시간 초과 에러 해결 set 내장 함수 이용 & list 변환 코드 제거
 # 상근이가 가지고 있는 숫자 카드의 개수 N
-n = int(input('>> '))
+n = int(input())
 # 상근이가 가지고 있는 숫자 카드 배열
-n_arr = list(map(int, input('>> ').split()))
+n_arr = set(map(int, input().split()))
 # 주어지는 숫자 카드의 개수 M
-m = int(input('>> '))
+m = int(input())
 # 주어지는 숫자 카드 배열
-m_arr = list(map(int, input('>> ').split()))
+m_arr = map(int, input().split())
 
-for num in m_arr:
-    # 해당 숫자 카드를 상근이가 가지고 있으면 1
-    if num in n_arr:
-        print(1, end=" ")
-    else: # 해당 숫자를 가지고 있지 않으면 0
-        print(0, end=" ")
-
-
+# 해당 숫자 카드를 상근이가 가지고 있으면 1, 없으면 0
+answer = [str(1) if num in n_arr else str(0) for num in m_arr]
+print(' '.join(answer))
