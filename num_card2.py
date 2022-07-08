@@ -25,19 +25,22 @@
 예제 출력
 3 0 0 1 2 0 0 2
 '''
+
+# 메모리, 실행 시간 최적화
 import sys
+input = sys.stdin.readline
 
 # 상근이가 가지고 있는 숫자 카드의 개수 N
-n = sys.stdin.readline().strip()
+n = input().strip()
 # 상근이가 가지고 있는 숫자 카드에 적혀있는 정수
-n_nums = map(int, sys.stdin.readline().split())
-# 정수 M개
-m = sys.stdin.readline().strip()
-# 숫자 카드에 적혀있는 정수
-m_nums = map(int, sys.stdin.readline().split())
-
+n_nums = map(int, input().split())
 n_dic = {}
 for n_num in n_nums:
     n_dic[n_num] = n_dic[n_num]+1 if n_num in n_dic else 1
+    
+# 정수 M개
+m = input().strip()
+# 숫자 카드에 적혀있는 정수
+m_nums = map(int, input().split())
 for m_num in m_nums:
     print(n_dic[m_num] if m_num in n_dic else 0, end=" ")
