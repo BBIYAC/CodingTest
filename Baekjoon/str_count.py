@@ -17,27 +17,39 @@ ababc
 예제 출력
 12
 '''
+# import sys
+# # 채점 서버의 재귀 깊이 늘리는 코드
+# sys.setrecursionlimit(10**6)
+# input = sys.stdin.readline
+
+# # 문자열 S
+# s = input().strip()
+# # 부분 문자열
+# s_parts = set()
+# len_s = len(s)
+# adder = s_parts.add
+
+# # 부분 문자열 구하는 함수
+# def comb(s, n):
+#     if n == len_s:
+#         adder(s)
+#         return
+#     for i in range(len_s-n+1):
+#         adder(s[i:i+n])
+#     n += 1
+#     comb(s, n)
+
+# comb(s, 1)
+# print(len(s_parts))
+
 import sys
-# 채점 서버의 재귀 깊이 늘리는 코드
-sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
 # 문자열 S
 s = input().strip()
 # 부분 문자열
 s_parts = set()
-len_s = len(s)
-adder = s_parts.add
-
-# 부분 문자열 구하는 함수
-def comb(s, n):
-    if n == len_s:
-        adder(s)
-        return
-    for i in range(len_s-n+1):
-        adder(s[i:i+n])
-    n += 1
-    comb(s, n)
-
-comb(s, 1)
-print(len(s_parts))
+for i in range(1, len(s)+1):
+    for j in range(len(s)-i+1):
+        s_parts.add(s[j:j+i])
+print(len(s_parts), s_parts)
