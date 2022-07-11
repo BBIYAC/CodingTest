@@ -25,19 +25,19 @@ input = sys.stdin.readline
 # 문자열 S
 s = input().strip()
 # 부분 문자열
-s_parts = set()
+s_parts = set() # 중복 제거를 위해 set 사용
 len_s = len(s)
+adder = s_parts.add
 
-# 부분 문자열 함수
+# 부분 문자열 구하는 함수(s : 문자열, n : 구간 길이)
 def comb(s, n):
     if n == len_s:
-        s_parts.add(s)
+        adder(s)
         return
-    else:
-        for i in range(len_s-n+1):
-            s_parts.add(s[i:i+n])
-        n += 1
-        comb(s, n)
+    for i in range(len_s-n+1):
+        adder(s[i:i+n])
+    n += 1
+    comb(s, n)
 
 comb(s, 1)
 print(len(s_parts))
