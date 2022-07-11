@@ -33,9 +33,5 @@ a, b = map(int, input().split())
 a_set = set(map(int, input().split()))
 # 집합 B의 모든 원소
 b_set = set(map(int, input().split()))
-# A-B
-ab_set = a_set - b_set
-# B-A
-ba_set = b_set - a_set
-# A-B와 B-A의 원소 개수
-print(len(ab_set)+len(ba_set))
+# 대칭 차집합
+print(len(a_set ^ b_set))
