@@ -28,6 +28,7 @@ s = input().strip()
 s_parts = set()
 len_s = len(s)
 
+# 부분 문자열 함수
 def comb(s, n):
     if n == len_s:
         s_parts.add(s)
