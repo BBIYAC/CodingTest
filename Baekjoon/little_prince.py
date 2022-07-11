@@ -80,23 +80,23 @@ input = sys.stdin.readline
 # 테스트 케이스 개수 T
 t = int(input().strip())
 for _ in range(t):
-    # 출발점 (x1, y1), 도착점 (x2, y2)
+    # 출발점(x1, y1), 도착점(x2, y2)
     x1, y1, x2, y2 = map(int, input().split())
     # 행성계의 개수 N
     n = int(input().strip())
     # 행성계 진입/이탈 수
     count = 0
-    # 행성계의 중점과 반지름(cx, cy, r)
     for _ in range(n):
+        # 행성계의 중점과 반지름(cx, cy, r)
         cx, cy, r = map(int, input().split())
-        # 출발점이 (cx, cy, r) 안에 있는지
+        # 출발점이 행성계 안에 있는지 : 원의 방정식 활용
         start = (x1-cx)**2 + (y1-cy)**2 < r**2
-        # 도착점이 (cx, cy, r) 안에 있는지
+        # 도착점이 행성계 안에 있는지
         end = (x2-cx)**2 + (y2-cy)**2 < r**2
         # 최소 진입/이탈 수 카운트
         if start or end: 
             count += 1
-            # 같은 행성계 안에 있으면 진입/이탈 수 -1
+            # 출발점, 도착점이 같은 행성계 안에 있으면 : 진입/이탈 수 - 1
             if start and end:
                 count -= 1      
     print(count)
