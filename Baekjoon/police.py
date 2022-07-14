@@ -38,14 +38,35 @@ N개의 수가 주어졌을 때, 가능한 M을 모두 찾는 프로그램을 �
 3
 '''
 
-# 시간초과
 import sys
 input = sys.stdin.readline
+
+# 최대공약수 함수
+def gcd(n1, n2):
+    # 유클리드 호제법 : 반복문 사용
+    while (n2 > 0):
+        n1, n2 = n2, n1%n2
+    return n1
 
 # 종이에 적은 수 개수 N
 n = int(input().strip())
 # 종이에 적은 수 N개
-nums = set(int(input().strip()) for _ in range(n))
-# 나누는 수 M
-for ans in filter(lambda m: len(set(map(lambda num: num%m, nums))) == 1, range(2, min(nums)+1)):
-    print(ans, end=" ")
+nums = sorted([int(input().strip()) for _ in range(n)])
+# n2-n1 = M(s2-s1), n3-n2 = M(s3-s2) : n2-n1과 n3-n2의 최대공약수 찾기
+num = nums[1]-nums[0]
+for i in range(2, n):
+    num = gcd(nums[i]-nums[i-1], num)
+
+# M 리스트
+ms = set()
+# 최대공약수
+ms.add(num)
+# 최대공약수의 약수 : 약수를 구할 때 루트 + 1 만큼 반복문 실행하는 것이 가장 효율적인 방법
+for i in range(2, int(num**0.5)+1):
+    if num%i == 0:
+        ms.add(i)
+        ms.add(num//i)
+
+# 나머지가 같도록 나누는 수 M = 최대공약수의 약수, 최대공약수
+ms = sorted(list(ms))
+print(*ms)
