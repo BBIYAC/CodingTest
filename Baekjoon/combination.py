@@ -18,17 +18,21 @@ binomial(N,M)의 끝자리 0의 개수를 출력하는 프로그램을 작성하
 
 import sys
 
-# 조합
-def comb(n, k):
-    if k==0 or k==n:
-        return 1
-    return comb(n-1, k) + comb(n-1, k-1)
+# factorial에서 5 or 2의 개수(지수 구하기)
+def factorial_5or2(n, t):
+    count = 0
+    while n>0:
+        count += n//t
+        n //= t
+    return count
 
 # 정수 N, M
 n, m = map(int, sys.stdin.readline().split())
 
-# 조합
-combination = str(comb(n, m))
+# 지수 법칙 이용 : N!에서 5 or 2의 개수 - (M!에서 5 or 2의 개수 + (N-M)!에서 5 or 2의 개수)
+cnt_5=factorial_5or2(n,5)-(factorial_5or2(m,5)+factorial_5or2(n-m,5))
+cnt_2=factorial_5or2(n,2)-(factorial_5or2(m,2)+factorial_5or2(n-m,2))
 
-# 0의 개수
-print(len(combination) - len(combination.rstrip("0")))
+# 10이 되려면 5와 2 모두 있어야 하므로 5와 2 중 최솟값의 개수만큼 0의 개수가 출력됨
+result=min(cnt_5,cnt_2)
+print(result)
