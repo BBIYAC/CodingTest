@@ -34,10 +34,10 @@ for s in input:
 only_one = True 
 answer = input[0]
 for k, v in count.items():
-    if count[answer] < count[k]:
+    if count[answer] < count[k]: # 카운트 수가 최대인 문자 찾기
         answer = k
         only_one = True
-    elif count[k] == count[answer] and k != answer:
+    elif count[k] == count[answer]: # 카운트 수가 같은 경우(여러 개)
         only_one = False
 
 # 가장 많이 카운트 된 문자 출력(여러 개면 ? 출력)
