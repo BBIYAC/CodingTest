@@ -23,36 +23,32 @@
 import sys
 input = sys.stdin.readline
 
-# # 라면 공장의 개수 N
-# N = input()
-# # N개의 정수
-# ramens = list(map(int, input().split()))
-# # 최소 금액
-# price = 0
-# while sum(ramens) != 0:
-#     if ramens[0] == 0:
-#         ramens.pop(0)
-#         continue
-#     ramen_len = len(ramens)
-#     # i번 공장과 (i+1)번 공장, (i+2)번 공장 각각 라면을 하나씩 구매하는 경우 7원
-#     if ramen_len > 2 and ramens[1] != 0 and ramens[2] != 0 and ramens[1] <= ramens[2]:
-#         three = min(ramens[:3])
-#         ramens[:3] = map(lambda x: x-three, ramens[:3])
-#         price += 7*three
-#     # i번 공장과 (i+1)번 공장에서 각각 라면을 하나씩 구매하는 경우 5원
-#     elif ramen_len > 1 and ramens[1] != 0:
-#         two = min(min(ramens[:2]), ramens[1]-ramens[0])
-#         ramens[:2] = map(lambda x: x-1, ramens[:2])
-#         price += 5*two
-#     # i번 공장에서 라면 하나 구매하는 경우 3원
-#     else:
-#         one = ramens[0]
-#         ramens[0] = 0
-#         price += 3*one
-#     print(ramens, price)
+# 라면 공장의 개수 N
+N = input()
+# N개의 정수
+ramens = list(map(int, input().split()))
+# 최소 금액
+price = 0
+while sum(ramens) != 0:
+    if ramens[0] == 0:
+        ramens.pop(0)
+        continue
+    ramen_len = len(ramens)
+    # i번 공장과 (i+1)번 공장, (i+2)번 공장 각각 라면을 하나씩 구매하는 경우 7원
+    if ramen_len > 2 and ramens[1] != 0 and ramens[2] != 0 and ramens[1] <= ramens[2]:
+        three = min(ramens[:3])
+        ramens[:3] = map(lambda x: x-three, ramens[:3])
+        price += 7*three
+    # i번 공장과 (i+1)번 공장에서 각각 라면을 하나씩 구매하는 경우 5원
+    elif ramen_len > 1 and ramens[1] != 0:
+        two = min(min(ramens[:2]), ramens[1]-ramens[0])
+        ramens[:2] = map(lambda x: x-1, ramens[:2])
+        price += 5*two
+    # i번 공장에서 라면 하나 구매하는 경우 3원
+    else:
+        one = ramens[0]
+        ramens[0] = 0
+        price += 3*one
+    print(ramens, price)
 
-# print(price)
-
-n = int(input().rstrip())
-for i in range(n):
-    print(' '*i + '*'*(n-i))
+print(price)
