@@ -1,4 +1,4 @@
-# 별찍기 6
+# 별찍기 9
 import sys
 N = int(sys.stdin.readline().rstrip())
 for i in range(N):
