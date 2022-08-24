@@ -1,30 +1,10 @@
-# 단어 뒤집기 2
+# 단어 뒤집기
 import sys
-
 input = sys.stdin.readline
 
-s = input().rstrip()
-flag = False
-word = ""
-answer = ""
-
-for i in s:
-    if flag == False:
-        if i == "<":
-            flag = True
-            word += i
-        elif i == " ":
-            word += i
-            answer += word
-            word = ""
-        else:
-            word = i + word
-
-    else:
-        word += i
-        if i == ">":
-            flag = False
-            answer += word
-            word = ""
-
-print(answer + word)
+t = int(input().rstrip())
+for _ in range(t):
+    words = input().split()
+    for word in words:
+        print(''.join(reversed(list(word))), end=' ')
+    print()
