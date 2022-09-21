@@ -8,7 +8,7 @@ N, M = map(int, input().split())
 graph = [input().rstrip() for _ in range(N)]
 
 def bfs(n, m):
-    # 처음 시작 칸은 (1 x 1) => 인덱스로 0, 0
+    # 처음 시작 칸은 (1, 1) => 인덱스로 (0, 0)
     queue = [(0, 0)]
     # 방문 여부 & 이동거리
     visited = [[0]*M for _ in range(N)]
@@ -33,6 +33,6 @@ def bfs(n, m):
                 queue.append((ny, nx))
     # 목적지까지의 이동 거리
     return visited[n][m]
-    
+
 # 인덱스 때문에 각각 -1
 print(bfs(N-1, M-1))
