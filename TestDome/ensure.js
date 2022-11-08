@@ -1,6 +1,9 @@
 function ensure(value) {
-  if (value) return value;
-  else throw Error;
+  if (value === undefined) {
+    throw new Error('value is undefined');
+  }
+
+  return value;
 }
 
 try {
