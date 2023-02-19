@@ -12,3 +12,18 @@ function createCheckDigit(membershipId) {
 }
 
 console.log(createCheckDigit("55555"));
+
+// other solution
+function createCheckDigit(membershipId) {
+  // Write the code that goes here.
+  let str = membershipId;
+  while ( str.length !== 1 ){
+    str = str
+      .split('')
+      .reduce((accumulator, current)=>accumulator + parseInt(current), 0)
+      .toString()
+  }
+  return str
+}
+
+console.log(createCheckDigit("55555"));
