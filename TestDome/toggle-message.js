@@ -1,6 +1,7 @@
 // React is loaded and is available as React and ReactDOM
 // imports should NOT be used
 class Message extends React.Component {
+    // visible 상태 저장
     constructor(props) {
       super(props);
       this.state = { 
@@ -8,8 +9,7 @@ class Message extends React.Component {
       };
     }
     
-    toggleRender = (e) => {
-      e.preventDefault();
+    toggleRender = () => {
       this.setState({
         visible: !this.state.visible
       });
