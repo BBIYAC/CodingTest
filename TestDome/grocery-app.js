@@ -1,17 +1,19 @@
 // React is loaded and is available as React and ReactDOM
 // imports should NOT be used
 const Product = props => {
-  const plus = (idx) => {
-    props.onVote("+", idx);
+  // plus 함수
+  const plus = () => {
+    props.onVote("+", props.index);
 };
-  const minus = (idx) => {
-    props.onVote("-", idx);
+  // minus 함수
+  const minus = () => {
+    props.onVote("-", props.index);
 };
   return (
     <li>
-    <span>{props.product.name}</span> - <span>votes: {props.product.votes}</span>
-    <button onClick={() => plus(props.index)}>+</button>{" "}
-    <button onClick={() => minus(props.index)}>-</button>
+    <span>{props.name}</span> - <span>votes: {props.votes}</span>
+    <button onClick={plus}>+</button>{" "}
+    <button onClick={minus}>-</button>
     </li>
   );
 };
@@ -21,19 +23,16 @@ const GroceryApp = (props) => {
   const onVote = (dir, index) => {
     const Products = [...products];
     
-    if (dir === "+") {
-    Products[index].votes = Products[index].votes + 1;
+    if (dir === "+") Products[index].votes += 1;
+    else Products[index].votes -=  1;
+
     setProducts(Products);
-    } else {
-    Products[index].votes = Products[index].votes - 1;
-    setProducts(Products);
-    }
   };
 
   return (
     <ul>
       {products.map((product, index) => (
-        <Product key={index} onVote={onVote} index={index} product={product} />
+        <Product key={index} onVote={onVote} index={index} name={product.name} votes={product.name} />
       ))}
     </ul>
   );
